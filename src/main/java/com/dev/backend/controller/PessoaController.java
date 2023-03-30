@@ -15,41 +15,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.backend.entity.Estado;
-import com.dev.backend.service.EstadoService;
+import com.dev.backend.entity.Pessoa;
+import com.dev.backend.service.PessoaService;
 
 @RestController
-@RequestMapping("/api/estado")
+@RequestMapping("/api/pessoa")
 @CrossOrigin
-public class EstadoController {
+public class PessoaController {
     
     @Autowired
-    private EstadoService estadoService;
+    private PessoaService pessoaService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos(){
-       return estadoService.buscarTodos();
+    public List<Pessoa> buscarTodos(){
+       return pessoaService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado){
-        return estadoService.inserir(estado);
+    public Pessoa inserir(@RequestBody Pessoa objeto){
+        return pessoaService.inserir(objeto);
     }
 
     @PutMapping("/")
-    public Estado alterar(@RequestBody Estado estado){
-        return estadoService.alterar(estado);
+    public Pessoa alterar(@RequestBody Pessoa objeto){
+        return pessoaService.alterar(objeto);
     }
 
-    @DeleteMapping("/{id}")   
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
-        estadoService.excluir(id);
+        pessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")   
-    public ResponseEntity<Estado> buscarPorId(@PathVariable("id") Long id){
-        
-        return ResponseEntity.ok(estadoService.buscarPorId(id));
-    }
 }
